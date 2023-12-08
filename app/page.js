@@ -2,20 +2,36 @@
 'use client';
 import React, { useState } from 'react';
 
+async function getData(reference, edition) {
+  const url = `http://api.alquran.cloud/v1/ayah/${reference}/${edition}`;
+  const res = await fetch(url);
+
+  if (!res.ok) {
+      throw new Error('Failed to fetch verse');
+  }
+
+  return res.json();
+}
+
 export default function Home() {
     const [reference, setReference] = useState('');
     const [edition, setEdition] = useState('en.asad');
     const [verse, setVerse] = useState('');
+    const [error, setError] = useState('');
 
-    const fetchVerse = async () => {
-        const url = `http://api.alquran.cloud/v1/ayah/${reference}/${edition}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        if (data.status === 'OK') {
-            setVerse(data.data.text);
-        } else {
-            setVerse('Verse not found. Please check the reference or edition.');
-        }
+    const handleFetchVerse = async () => {
+      try {
+          const data = await getData(reference, edition);
+          if (data.status === 'OK') {
+              setVerse(data.data.text);
+              setError('');
+          } else {
+              setVerse('');
+              setError('Verse not found. Please check the reference or edition.');
+          }
+      } catch (err) {
+          setError(err.message);
+      }
     };
 
     return (
@@ -32,7 +48,7 @@ export default function Home() {
                 <option value="en.asad">English Translation</option>
                 <option value="ar.alafasy">Arabic</option>
             </select>
-            <button onClick={fetchVerse}>Fetch Verse</button>
+            <button onClick={handleFetchVerse}>Fetch Verse</button>
 
             {verse && <div className="verse">{verse}</div>}
         </div>
