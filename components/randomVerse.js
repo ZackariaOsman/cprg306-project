@@ -1,6 +1,5 @@
-// components/RandomVerse.js
 import React, { useState } from 'react';
-import { getData } from '../utils/api'; // Ensure this path is correct
+import { getData } from '../utils/api'; 
 
 export default function RandomVerse() {
     const [verseInfo, setVerseInfo] = useState({});
@@ -68,6 +67,7 @@ export default function RandomVerse() {
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded fixed bottom-10 left-1/2 transform -translate-x-1/2" onClick={fetchRandomVerse}>Fetch Random Verse</button>
         </div>
     );
+    
     
     
     

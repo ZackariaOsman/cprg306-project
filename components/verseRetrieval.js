@@ -1,4 +1,3 @@
-// components/VerseRetrieval.js
 import React, { useState } from 'react';
 import { getData } from '../utils/api'; 
 
