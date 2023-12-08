@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 
 async function getData(reference, edition) {
-  const baseUrl = process.env.REACT_APP_API_BASE_URL; // Accessing the environment variable
+  const baseUrl = process.env.R;
+  console.log("Base URL:", baseUrl); // This line will print the base URL to the console
   const url = `${baseUrl}/ayah/${reference}/${edition}`;
   const res = await fetch(url);
 
