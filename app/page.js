@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 
 async function getData(reference, edition) {
-  const url = `http://api.alquran.cloud/v1/ayah/${reference}/${edition}`;
+  const baseUrl = process.env.REACT_APP_API_BASE_URL; // Accessing the environment variable
+  const url = `${baseUrl}/ayah/${reference}/${edition}`;
   const res = await fetch(url);
 
   if (!res.ok) {
