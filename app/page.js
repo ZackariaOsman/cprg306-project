@@ -3,12 +3,14 @@
 import React from "react";
 import VerseRetrieval from "components/verseRetrieval";
 import RandomVerse from "components/randomVerse"; 
+import NavBar from "components/navbar";
+
 
 export default function Home() {
   return (
       <div>
-          <h1 className="mb-4">Random Quran Verse</h1>
-          <RandomVerse ></RandomVerse> 
+        <NavBar></NavBar>
+        <RandomVerse ></RandomVerse> 
       </div>
   );
 }
